@@ -56,15 +56,6 @@ function opValue() {
   firstNumber = parseInt(display.getAttribute('value'));
   display.setAttribute('value', '');
   operator = this.getAttribute('value');
-  if (operator === '/') {
-    answer = divide(firstNumber, secondNumber);
-  } else if (operator === 'x') {
-    answer = multiply(firstNumber, secondNumber);
-  } else if (operator === '+') {
-    answer = add(firstNumber, secondNumber);
-  } else if (operator === '-') {
-    answer = substract(firstNumber, secondNumber);
-  } 
 }
 
 // Handling '=' operator
@@ -75,7 +66,6 @@ equal[0].addEventListener('click', calculation, false);
 
 function calculation() {
   secondNumber = parseInt(display.getAttribute('value'));
-  display.setAttribute('value', answer);
 
   switch (operator) {
     case '+':
