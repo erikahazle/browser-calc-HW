@@ -1,5 +1,29 @@
-var firstNumber = "";
-var secondNumber = "";
+var firstNumber = "0", secondNumber = "0", operator = "0";
+
+/************************
+FUNCTIONS FOR CALCULATIONS
+************************/
+
+var substract = function(firstNumber, secondNumber) {
+    return firstNumber - secondNumber;
+}
+
+var add = function(firstNumber, secondNumber) {
+    return firstNumber + secondNumber;
+}
+
+var multiply = function(firstNumber, secondNumber) {
+    return firstNumber * secondNumber;
+}
+
+var divide = function(firstNumber, secondNumber) {
+    return firstNumber / secondNumber;
+}
+
+
+/************************
+ENTERING NUMBERS
+************************/
 
 var number = document.getElementsByClassName('number');
 var display = document.getElementById('display');
@@ -13,11 +37,14 @@ function numberValue() {
   var initialValue = display.getAttribute('value')
   if (initialValue == null) {
     initialValue = display.setAttribute('value', attr);
-    return initialValue;
   } else {
    initialValue = display.setAttribute('value', initialValue + attr);
   }
 }
+
+/************************
+ENTERING OPERATORS
+************************/
 
 var operators = document.getElementsByClassName('operator');
 
@@ -28,25 +55,50 @@ for(var i=0;i<operators.length;i++){
 function opValue() {
   firstNumber = parseInt(display.getAttribute('value'));
   display.setAttribute('value', '');
-  var operator = this.getAttribute('value');
+  operator = this.getAttribute('value');
   if (operator === '/') {
-    secondNumber = parseInt(display.getAttribute('value'));
-    var answer = firstNumber / secondNumber;
+    answer = divide(firstNumber, secondNumber);
   } else if (operator === 'x') {
-    secondNumber = parseInt(display.getAttribute('value'));
-    var answer = firstNumber * secondNumber;
+    answer = multiply(firstNumber, secondNumber);
   } else if (operator === '+') {
-    secondNumber = parseInt(display.getAttribute('value'));
-    var answer = firstNumber + secondNumber;
+    answer = add(firstNumber, secondNumber);
   } else if (operator === '-') {
-    secondNumber = parseInt(display.getAttribute('value'));
-    var answer = firstNumber - secondNumber;
-  } else if (operator === '=') {
-    secondNumber = parseInt(display.getAttribute('value'));
-    display.setAttribute('value', answer);
-  };
-
-
+    answer = substract(firstNumber, secondNumber);
+  } 
 }
 
+// Handling '=' operator
 
+var equal = document.getElementsByClassName('eq');
+
+equal[0].addEventListener('click', calculation, false);
+
+function calculation() {
+  secondNumber = parseInt(display.getAttribute('value'));
+  display.setAttribute('value', answer);
+
+  switch (operator) {
+    case '+':
+      display.setAttribute('value', add(firstNumber, secondNumber));
+      break;
+    case '-':
+      display.setAttribute('value', substract(firstNumber, secondNumber));
+      break;
+    case '/':
+      display.setAttribute('value', divide(firstNumber, secondNumber));
+      break;
+    case 'x':
+      display.setAttribute('value', multiply(firstNumber, secondNumber));
+      break;
+  }
+}
+
+// Handling 'c' operator
+
+var clear = document.getElementsByClassName('clear');
+
+clear[0].addEventListener('click', clearAct, false);
+
+function clearAct() {
+  display.setAttribute('value', '');
+}
