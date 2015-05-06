@@ -4,7 +4,7 @@ var firstNumber = "0", secondNumber = "0", operator = "0";
 FUNCTIONS FOR CALCULATIONS
 ************************/
 
-var substract = function(firstNumber, secondNumber) {
+var subtract = function(firstNumber, secondNumber) {
     return firstNumber - secondNumber;
 }
 
@@ -29,7 +29,7 @@ var number = document.getElementsByClassName('number');
 var display = document.getElementById('display');
 
 for(var i=0;i<number.length;i++){
-  number[i].addEventListener('click', numberValue, false);
+  number[i].addEventListener('click', numberValue);
 }
 
 function numberValue() {
@@ -49,7 +49,7 @@ ENTERING OPERATORS
 var operators = document.getElementsByClassName('operator');
 
 for(var i=0;i<operators.length;i++){
-  operators[i].addEventListener('click', opValue, false);
+  operators[i].addEventListener('click', opValue);
 }
 
 function opValue() {
@@ -62,7 +62,7 @@ function opValue() {
 
 var equal = document.getElementsByClassName('eq');
 
-equal[0].addEventListener('click', calculation, false);
+equal[0].addEventListener('click', calculation);
 
 function calculation() {
   secondNumber = parseInt(display.getAttribute('value'));
@@ -72,7 +72,7 @@ function calculation() {
       display.setAttribute('value', add(firstNumber, secondNumber));
       break;
     case '-':
-      display.setAttribute('value', substract(firstNumber, secondNumber));
+      display.setAttribute('value', subtract(firstNumber, secondNumber));
       break;
     case '/':
       display.setAttribute('value', divide(firstNumber, secondNumber));
